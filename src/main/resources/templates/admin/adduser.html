@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <br>
+    <a th:href="@{/logout}">Выйти</a>
+    <br>
+    <h3>Добавить пользователя</h3>
+    <form method="post" th:action="@{/admin/user/add}" th:object="${newuser}">
+        <br><br>
+            <label>Логин</label>
+            <input type="text" th:field="*{username}" required>
+        <br><br>
+            <span style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Логин некорректeн</span>
+        <br><br>
+            <label>Пароль</label>
+            <input type="password" th:field="*{password}" required>
+        <br><br>
+            <span style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Пароль некорректен</span>
+        <br><br>
+            <label>Имя пользователя</label>
+            <input type="text" th:field="*{name}" required>
+        <br><br>
+            <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Имя некорректно</span>
+        <br><br>
+            <label>Фамилия пользователя</label>
+            <input type="text" th:field="*{surname}" required>
+        <br><br>
+            <span style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Фамилия некорректна</span>
+        <br><br>
+            <label>Возраст</label>
+            <input type="text" th:field="*{age}"  required>
+        <br><br>
+            <span style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Возраст некорректен</span>
+        <br><br>
+            <label>Выберите права Пользователя</label>
+        <th:block th:each="role: ${roles}">
+            <input type="checkbox" th:field="*{roleSet}"
+                   th:text="${role.name}" th:value="${role.id}"/>
+        </th:block>
+        <br><br>
+        <span style="color: red" th:if="${#fields.hasErrors('roleSet')}" th:errors="*{roleSet}">Не выбрана роль</span>
+        <br><br>
+    <button type="submit">Сохранить</button>
+    </form>
+</body>
+</html>

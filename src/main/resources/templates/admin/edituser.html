@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<br><br>
+    <br>
+    <a th:href="@{/logout}">Выйти</a>
+    <br>
+<h3>Редактировать пользователя</h3>
+<form method="post" th:action="@{edit(userId=${edituser.id})}" th:object="${edituser}">
+    <br><br>
+    <label>Логин</label>
+    <input type="text" th:field="*{username}" readonly>
+    <br>
+    <span style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Логин некорректeн</span>
+    <br><br>
+    <label>Пароль</label>
+    <input type="password" th:field="*{password}">
+    <br>
+    <span style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Пароль некорректен</span>
+    <br><br>
+    <input type="text" disabled="true" name="id" th:field="*{id}" hidden>
+    <br><br>
+    <label>Имя пользователя</label>
+    <input type="text" name="name" th:field="*{name}" required>
+    <br>
+    <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Имя некорректно</span>
+    <br><br>
+    <label>Фамилия пользователя</label>
+    <input type="text" name="surname" th:field="*{surname}" required>
+    <br>
+    <span style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Фамилия некорректна</span>
+    <br><br>
+    <label>Возраст</label>
+    <input type="text" name="age" th:field="*{age}" required>
+    <br>
+    <span style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Возраст некорректен</span>
+    <br><br>
+    <label>Выберите права Пользователя</label>
+<!--    <div th:if="${roles.size > 1}">-->
+        <th:block th:each="role: ${roles}">
+            <input type="checkbox" th:field="*{roleSet}"
+                   th:text="${role.name}" th:value="${role.id}"/>
+        </th:block>
+<!--    </div>-->
+    <br>
+    <span style="color: red" th:if="${#fields.hasErrors('roleSet')}" th:errors="*{roleSet}">Не выбрана роль</span>
+<!--    <div th:if="${roles.size() == 1}">-->
+<!--        <th:block th:each="role: ${roles}">-->
+<!--            <input type="checkbox"  th:field="*{roleSet}"-->
+<!--                   th:text="${role.name}" th:value="${role.id}"/>-->
+<!--        </th:block>-->
+<!--    </div>-->
+    <br>
+    <button type="submit">Сохранить</button>
+</form>
+</body>
+</html>
