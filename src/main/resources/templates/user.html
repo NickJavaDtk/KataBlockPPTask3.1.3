@@ -1,36 +1,32 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>User page</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 <body>
-    <br>
-    <a th:href="@{/logout}">Выйти</a>
-    <br><br>
-  <h2>Информация о пользователе</h2>
-    <table>
-        <thead>
-        <tr>
-            <td>Логин</td>
-            <td>Пароль</td>
-            <th>Имя</th>
-            <th>Фамилия</th>
-            <th>Возраст</th>
-            <th>Роль</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td th:text="${about.username}">Логин</td>
-            <td th:text="${about.password}">Пароль</td>
-            <td th:text="${about.name}">Имя</td>
-            <td th:text="${about.surname}">Фамилия</td>
-            <td th:text="${about.age}">Возраст</td>
-            <td th:text="${about.roleSet}">Роль</td>
-        </tr>
-        </tbody>
-    </table>
+<header th:replace="fragments/header :: header"/>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col bg-white px-0">
+            <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <button class="nav-link active text-start" id="v-pills-user-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-user"
+                        type="button" role="tab" aria-controls="v-pills-user" aria-selected="true">User
+                </button>
+            </div>
+        </div>
+        <div class="col-10 vh-100 bg-light">
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-user" role="tabpanel"
+                     aria-labelledby="v-pills-user-tab">
+                    <div th:replace="fragments/userInfo :: userInfo"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

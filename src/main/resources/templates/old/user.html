@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <br>
+    <a th:href="@{/logout}">Выйти</a>
+    <br><br>
+  <h2>Информация о пользователе</h2>
+    <table>
+        <thead>
+        <tr>
+            <td>Логин</td>
+            <td>Пароль</td>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Возраст</th>
+            <th>Роль</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${about.username}">Логин</td>
+            <td th:text="${about.password}">Пароль</td>
+            <td th:text="${about.name}">Имя</td>
+            <td th:text="${about.surname}">Фамилия</td>
+            <td th:text="${about.age}">Возраст</td>
+            <td th:text="${about.roleSet}">Роль</td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

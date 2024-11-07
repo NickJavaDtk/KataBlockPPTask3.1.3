@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Qualifier("serviceRole")
 public class RoleServiceImp implements RoleService {
     private RoleRepository repository;
 
@@ -25,7 +24,7 @@ public class RoleServiceImp implements RoleService {
     }
 
     @Override
-    public Optional<Role> findRoleById(Long id) {
-        return repository.findById(id);
+    public Optional<Role> findRoleByName(String name) {
+        return repository.findRoleByName(name);
     }
 }

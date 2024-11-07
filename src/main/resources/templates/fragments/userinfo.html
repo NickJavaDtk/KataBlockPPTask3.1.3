@@ -1,0 +1,35 @@
+<div th:fragment="userInfo">
+    <h1 class="ps-3">User information-page</h1>
+    <div class="container-fluid">
+        <div class="row border">
+            <h5 class="p-2">About user</h5>
+        </div>
+        <div class="row border bg-white">
+            <table class="table table-borderless table-striped">
+                <thead>
+                <tr class="border-top">
+                    <th scope="col">Логин</th>
+                    <th scope="col">Пароль</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Фамилия</th>
+                    <th scope="col">Возраст</th>
+                    <th scope="col">Роль</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="border-top bg-light" th:object="${aboutuser}">
+                    <td th:text="*{username}"/>
+                    <td th:text="*{password}"/>
+                    <td th:text="*{name}"/>
+                    <td th:text="*{surname}"/>
+                    <td th:text="*{age}"/>
+                    <td>
+                        <th:block th:each="role : *{roleSet}">
+                            &nbsp;<span th:text="${role}"/>
+                        </th:block>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

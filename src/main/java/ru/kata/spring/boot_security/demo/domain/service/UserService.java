@@ -2,6 +2,8 @@ package ru.kata.spring.boot_security.demo.domain.service;
 
 
 
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import ru.kata.spring.boot_security.demo.domain.model.User;
 
 import java.util.List;
@@ -20,6 +22,10 @@ public interface UserService {
     List<User> getUserList();
 
     Optional<User> getUserByUsername(String username);
+
+    public String getCheckFieldAddUser(User users, BindingResult result, Model model, RoleService roleService);
+
+    public String getCheckFieldEditUser(User users, BindingResult result, Model model, RoleService roleService);
 
 
 }

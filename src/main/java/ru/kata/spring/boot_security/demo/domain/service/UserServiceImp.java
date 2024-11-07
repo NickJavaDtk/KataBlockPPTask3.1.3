@@ -1,12 +1,14 @@
 package ru.kata.spring.boot_security.demo.domain.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import ru.kata.spring.boot_security.demo.domain.model.Role;
 import ru.kata.spring.boot_security.demo.security.UserDetailsImp;
 import ru.kata.spring.boot_security.demo.domain.model.User;
 import ru.kata.spring.boot_security.demo.domain.repository.UserRepository;
@@ -14,25 +16,26 @@ import ru.kata.spring.boot_security.demo.domain.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserServiceImp implements UserService, UserDetailsService {
-    @Autowired
+
     private UserRepository repository;
 
-    @Autowired
-    BCryptPasswordEncoder encoder;
 
-    public UserServiceImp() {
+    private BCryptPasswordEncoder encoder;
+
+    public UserServiceImp(UserRepository repository, BCryptPasswordEncoder encoder) {
+        this.repository = repository;
+        this.encoder = encoder;
     }
-
-
 
     @Transactional
     @Override
     public Optional<User> getUser(String id) {
-        if(checkLongValue(id)) {
-           return repository.findById(Long.valueOf(id));
+        if (checkLongValue(id)) {
+            return repository.findById(Long.valueOf(id));
         }
         return null;
     }
@@ -63,9 +66,9 @@ public class UserServiceImp implements UserService, UserDetailsService {
     @Transactional
     @Override
     public void deleteUser(String id) {
-       if (checkLongValue(id)) {
-           repository.deleteById(Long.parseLong(id));
-       }
+        if (checkLongValue(id)) {
+            repository.deleteById(Long.parseLong(id));
+        }
     }
 
     @Transactional
@@ -98,6 +101,45 @@ public class UserServiceImp implements UserService, UserDetailsService {
             throw new UsernameNotFoundException("Пользователь с логином " + username + " не найден");
         }
         return new UserDetailsImp(userTmp);
+    }
+
+    @Override
+    public String getCheckFieldAddUser(User users, BindingResult result, Model model, RoleService roleService) {
+        Optional<User> userTmp = getUserByUsername(users.getUsername());
+        if (userTmp.isPresent() || users.getRoleSet().isEmpty()) {
+            if (userTmp.isPresent()) {
+                result.rejectValue("username", "error.username", "Данный логин уже присутствует в системе");
+                List<Role> rolesList = roleService.getRoleList();
+                model.addAttribute("roles", rolesList);
+            }
+            if (users.getRoleSet().isEmpty()) {
+                result.rejectValue("roleSet", "error.roleSet", "Вы должны выбрать права пользователя");
+                List<Role> rolesList = roleService.getRoleList();
+                model.addAttribute("roles", rolesList);
+            }
+            return "admin/adduser";
+        } else if (result.hasErrors()) {
+            List<Role> rolesList = roleService.getRoleList();
+            model.addAttribute("roles", rolesList);
+            return "admin/adduser";
+        }
+        return null;
+    }
+
+    @Override
+    public String getCheckFieldEditUser(User users, BindingResult result, Model model, RoleService roleService) {
+        if (result.hasErrors()) {
+            List<Role> rolesList = roleService.getRoleList();
+            model.addAttribute("roles", rolesList);
+            return "admin/edituser";
+        }
+        if (users.getRoleSet().isEmpty()) {
+            result.rejectValue("roleSet", "error.roleSet", "Вы должны выбрать права пользователя");
+            List<Role> rolesList = roleService.getRoleList();
+            model.addAttribute("roles", rolesList);
+            return "admin/edituser";
+        }
+        return null;
     }
 
 }
