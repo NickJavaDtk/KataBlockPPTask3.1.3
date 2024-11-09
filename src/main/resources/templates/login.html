@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
 <head>
-    <title>Login page</title>
-<!--    <link  th:href="@{/css/bootstrap.min.css}" rel="stylesheet"-->
-<!--          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+    <title>Страница авторизации</title>
     <link href="/css/bootstrap.min.css"  th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 <body>
@@ -20,13 +18,10 @@
             <input type="text" id="emailAddress" name="username" class="form-control" placeholder="Имя пользователя"
                    required autofocus>
             <input type="password" id="password" name="password" class="form-control" placeholder="Пароль">
-            <input type="submit" value="Sign in" class="btn btn-lg btn-primary mt-2"/>
+            <input type="submit" value="Отправить" class="btn btn-lg btn-primary mt-2"/>
         </form>
     </div>
 </div>
-<!--<script th:src="@{/js/bootstrap.bundle.min.js}"-->
-<!--        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"-->
-<!--        crossorigin="anonymous"></script>-->
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

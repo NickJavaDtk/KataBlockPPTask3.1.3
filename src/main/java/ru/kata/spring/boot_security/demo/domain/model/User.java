@@ -20,20 +20,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "users_id")
     private Long id;
-    @NotBlank(message = "Логин не должен быть пустым")
-    //@UniqueElements
-    @Column(name = "login")
+//    @NotBlank(message = "Логин не должен быть пустым")
+//    @Column(name = "login")
     private String username;
-    @NotBlank(message = "Пароль не должно быть пустым")
-    @Size(min = 5, message = "Минимальная длина пароль 5 символов")
+//    @NotBlank(message = "Пароль не должно быть пустым")
+//    @Size(min = 5, message = "Минимальная длина пароль 5 символов")
     private String password;
-    @NotBlank(message = "Имя не должно быть пустым")
-    @Size(min = 2, message = "Имя должно включать минимум два символа")
+//    @NotBlank(message = "Имя не должно быть пустым")
+//    @Size(min = 2, message = "Имя должно включать минимум два символа")
     private String name;
-    @NotBlank(message = "Фамилия не должна быть пустой")
-    @Size(min = 2, message = "Фамилия должна включать минимум два символа")
+//    @NotBlank(message = "Фамилия не должна быть пустой")
+//    @Size(min = 2, message = "Фамилия должна включать минимум два символа")
     private String surname;
-    @Min(value = 0, message = "возраст не может быть меньше 0")
+//    @Min(value = 0, message = "возраст не может быть меньше 0")
     private Integer age;
 
 

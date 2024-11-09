@@ -3,10 +3,10 @@
         <div class="container-fluid">
             <div>
                 <span class="fw-bold" th:text="${#authentication.name}">USERNAME</span>
-                <span> with roles: </span>
-                <span th:text="${role}">ROLE</span>
-<!--                <span sec:authorize="hasRole('ADMIN')">ADMIN</span>-->
-<!--                <span sec:authorize="hasRole('USER')">USER</span>-->
+                <span> С ролями </span>
+<!--                <span th:text="${role}">ROLE</span>-->
+                <span sec:authorize="hasRole('ADMIN')">Администратор</span>
+                <span sec:authorize="hasRole('USER')">Пользователь</span>
             </div>
             <a class="text-decoration-none font-weight-bold text-secondary" th:href="@{/logout}">Logout</a>
         </div>
