@@ -101,7 +101,7 @@
 
                     <div class="tab-pane fade px-4" id="newUser" role="tabpanel" aria-labelledby="nav-newUser-tab">
                         <div class="p-2">
-                            <h5>Add new user</h5>
+                            <h5>Добавить пользователя</h5>
                         </div>
                         <!--Форма для ввода нового пользователя-->
                         <div class="row justify-content-center align-items-center bg-white">
@@ -135,7 +135,7 @@
                                             </div>
                                             <div class="form-group m-3">
                                                 <label for="ageNew" class="col-form-label">Возраст</label>
-                                                <input type="text" class="form-control" id="ageNew"
+                                                <input type="number" class="form-control" id="ageNew"
                                                        name="age" th:field="*{age}" th:value="${aboutuser.getAge()}" required/>
                                             </div>
 
@@ -175,7 +175,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">У</h5>
+                        <h5 class="modal-title">Удалить пользователя</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                     </div>
@@ -183,7 +183,7 @@
                         <div style="text-align: center">
                             <div class="row justify-content-center align-items-center">
                                 <form class="text-center"
-                                      th:action="@{/admin/delete(userId=${user.getId()})}"
+                                      th:action="@{/admin/user/delete(userId=${user.getId()})}"
                                       th:method="GET"
                                       id="deleteFormBody">
                                     <div class="form-group font-weight-bold">
@@ -191,8 +191,8 @@
                                             <label for="idDel"
                                                    class="col-form-label">ID</label>
                                             <input type="text" class="form-control" id="idDel"
-                                                   name="id" th:value="${user.getId()}"
-                                                   disabled/>
+                                                   name="userId" th:value="${user.getId()}"
+                                                   readonly/>
                                         </div>
 
                                         <div class="form-group m-3">
@@ -357,7 +357,7 @@
                                                     size="2"
                                                     id="rolesEdit"
                                                     name="roleSet">
-                                                <option th:each="role: ${user.getRoleSet()}"
+                                                <option th:each="role: ${role}"
                                                         th:value="${role.getId()}"
                                                         th:text="${role.getName()}"
                                                         selected>

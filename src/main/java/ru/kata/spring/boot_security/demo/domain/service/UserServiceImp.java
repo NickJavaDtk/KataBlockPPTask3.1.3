@@ -16,7 +16,7 @@ import ru.kata.spring.boot_security.demo.domain.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+
 
 @Service
 public class UserServiceImp implements UserService, UserDetailsService {
@@ -53,7 +53,9 @@ public class UserServiceImp implements UserService, UserDetailsService {
         if (checkLongValue(id)) {
             User userTmp = getUser(id).get();
             if (userTmp != null) {
-                userTmp.setPassword(encoder.encode(user.getPassword()));
+                if (!encoder.matches(encoder.encode(user.getPassword()), userTmp.getPassword())) {
+                    userTmp.setPassword(encoder.encode(user.getPassword()));
+                }
                 userTmp.setName(user.getName());
                 userTmp.setSurname(user.getSurname());
                 userTmp.setAge(user.getAge());
