@@ -51,6 +51,7 @@ public class AdminController {
 
     @PostMapping("/user/edit")
     public String editUser(@ModelAttribute("newuser") User users, @RequestParam("userId") String id) {
+        String ss = "";
         userService.updateUser(id, users);
         return "redirect:/admin";
     }

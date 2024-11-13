@@ -59,7 +59,9 @@ public class UserServiceImp implements UserService, UserDetailsService {
                 userTmp.setName(user.getName());
                 userTmp.setSurname(user.getSurname());
                 userTmp.setAge(user.getAge());
-                userTmp.setRoleSet(user.getRoleSet());
+                if (!user.getRoleSet().isEmpty()) {
+                    userTmp.setRoleSet(user.getRoleSet());
+                }
                 repository.save(userTmp);
             }
         }
